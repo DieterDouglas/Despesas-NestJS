@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { api } from '../api/client';
 import { useAuth } from '../auth/AuthContext';
+import { CategoryChart } from './CategoryChart';
 
 interface Expense {
   id: string;
@@ -103,6 +104,8 @@ export function Expenses() {
         )}
       </form>
       {error && <p>{error}</p>}
+
+      <CategoryChart expenses={expenses} />
 
       <ul>
         {expenses.map((expense) => (
