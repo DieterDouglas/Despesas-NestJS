@@ -2,14 +2,11 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { api } from '../api/client';
 import { useAuth } from '../auth/AuthContext';
 import { CategoryChart } from './CategoryChart';
-
-interface Expense {
-  id: string;
-  description: string;
-  amount: string;
-  category: string;
-  createdAt: string;
-}
+import { Card } from '../components/Card';
+import { Button } from '../components/Button';
+import { ExpenseForm } from '../components/ExpenseForm';
+import { ExpenseListItem } from '../components/ExpenseListItem';
+import type { Expense } from '../types/expense';
 
 export function Expenses() {
   const { logout } = useAuth();
@@ -69,53 +66,47 @@ export function Expenses() {
   }
 
   return (
-    <div>
-      <h1>Despesas</h1>
-      <button onClick={logout}>Sair</button>
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-3xl mx-auto px-4 py-8 flex flex-col gap-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-semibold text-gray-900">Despesas</h1>
+          <Button variant="secondary" onClick={logout}>
+            Sair
+          </Button>
+        </div>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Descrição"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-        <input
-          type="number"
-          step="0.01"
-          placeholder="Valor"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Categoria"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          required
-        />
-        <button type="submit">{editingId ? 'Salvar' : 'Adicionar'}</button>
-        {editingId && (
-          <button type="button" onClick={resetForm}>
-            Cancelar
-          </button>
-        )}
-      </form>
-      {error && <p>{error}</p>}
+        <Card>
+          <ExpenseForm
+            description={description}
+            amount={amount}
+            category={category}
+            isEditing={!!editingId}
+            error={error}
+            onDescriptionChange={setDescription}
+            onAmountChange={setAmount}
+            onCategoryChange={setCategory}
+            onSubmit={handleSubmit}
+            onCancel={resetForm}
+          />
+        </Card>
 
-      <CategoryChart expenses={expenses} />
+        <Card>
+          <CategoryChart expenses={expenses} />
+        </Card>
 
-      <ul>
-        {expenses.map((expense) => (
-          <li key={expense.id}>
-            {expense.description} — R$ {Number(expense.amount).toFixed(2)} ({expense.category})
-            <button onClick={() => handleEdit(expense)}>Editar</button>
-            <button onClick={() => handleDelete(expense.id)}>Excluir</button>
-          </li>
-        ))}
-      </ul>
+        <Card>
+          <ul className="divide-y divide-gray-200">
+            {expenses.map((expense) => (
+              <ExpenseListItem
+                key={expense.id}
+                expense={expense}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            ))}
+          </ul>
+        </Card>
+      </div>
     </div>
   );
 }
