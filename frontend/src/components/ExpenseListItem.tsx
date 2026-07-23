@@ -11,7 +11,7 @@ interface ExpenseListItemProps {
 export function ExpenseListItem({ expense, onEdit, onDelete }: ExpenseListItemProps) {
   return (
     <li className="flex items-center justify-between py-3 gap-3">
-      <div className="min-w-0">
+      <div className="min-w-0 text-start">
         <p className="font-medium text-gray-900 truncate">{expense.description}</p>
         <p className="text-sm text-gray-500">{EXPENSE_CATEGORY_LABELS[expense.category]}</p>
       </div>

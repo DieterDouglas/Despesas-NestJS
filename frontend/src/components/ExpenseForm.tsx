@@ -51,16 +51,13 @@ export function ExpenseForm({
       />
       <Select
         value={category}
-        onChange={(e) => onCategoryChange(e.target.value as ExpenseCategory)}
-        required
+        onValueChange={(value) => onCategoryChange(value as ExpenseCategory)}
+        options={Object.values(ExpenseCategory).map((value) => ({
+          value,
+          label: EXPENSE_CATEGORY_LABELS[value],
+        }))}
         className="sm:w-44"
-      >
-        {Object.values(ExpenseCategory).map((value) => (
-          <option key={value} value={value}>
-            {EXPENSE_CATEGORY_LABELS[value]}
-          </option>
-        ))}
-      </Select>
+      />
       <div className="flex gap-2 w-full sm:w-auto">
         <Button type="submit">{isEditing ? 'Salvar' : 'Adicionar'}</Button>
         {isEditing && (
