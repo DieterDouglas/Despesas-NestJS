@@ -1,4 +1,5 @@
-import { IsNumber, IsPositive, IsString } from 'class-validator';
+import { IsEnum, IsNumber, IsPositive, IsString } from 'class-validator';
+import { ExpenseCategory } from '../expense-category.enum';
 
 export class CreateExpenseDto {
   @IsString()
@@ -8,6 +9,6 @@ export class CreateExpenseDto {
   @IsPositive()
   amount: number;
 
-  @IsString()
-  category: string;
+  @IsEnum(ExpenseCategory)
+  category: ExpenseCategory;
 }

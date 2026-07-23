@@ -1,17 +1,19 @@
 import type { FormEvent } from 'react';
 import { Input } from './Input';
-import { Button } from './Button';
+import { Select } from './Select';
+import { Button, ButtonVariant } from './Button';
 import { FormError } from './FormError';
+import { ExpenseCategory, EXPENSE_CATEGORY_LABELS } from '../types/expense-category';
 
 interface ExpenseFormProps {
   description: string;
   amount: string;
-  category: string;
+  category: ExpenseCategory;
   isEditing: boolean;
   error: string;
   onDescriptionChange: (value: string) => void;
   onAmountChange: (value: string) => void;
-  onCategoryChange: (value: string) => void;
+  onCategoryChange: (value: ExpenseCategory) => void;
   onSubmit: (event: FormEvent) => void;
   onCancel: () => void;
 }
@@ -47,18 +49,22 @@ export function ExpenseForm({
         required
         className="sm:w-32"
       />
-      <Input
-        type="text"
-        placeholder="Categoria"
+      <Select
         value={category}
-        onChange={(e) => onCategoryChange(e.target.value)}
+        onChange={(e) => onCategoryChange(e.target.value as ExpenseCategory)}
         required
-        className="sm:w-40"
-      />
+        className="sm:w-44"
+      >
+        {Object.values(ExpenseCategory).map((value) => (
+          <option key={value} value={value}>
+            {EXPENSE_CATEGORY_LABELS[value]}
+          </option>
+        ))}
+      </Select>
       <div className="flex gap-2 w-full sm:w-auto">
         <Button type="submit">{isEditing ? 'Salvar' : 'Adicionar'}</Button>
         {isEditing && (
-          <Button type="button" variant="secondary" onClick={onCancel}>
+          <Button type="button" variant={ButtonVariant.Secondary} onClick={onCancel}>
             Cancelar
           </Button>
         )}

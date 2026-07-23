@@ -1,5 +1,6 @@
-import { Button } from './Button';
+import { Button, ButtonVariant } from './Button';
 import type { Expense } from '../types/expense';
+import { EXPENSE_CATEGORY_LABELS } from '../types/expense-category';
 
 interface ExpenseListItemProps {
   expense: Expense;
@@ -12,16 +13,16 @@ export function ExpenseListItem({ expense, onEdit, onDelete }: ExpenseListItemPr
     <li className="flex items-center justify-between py-3 gap-3">
       <div className="min-w-0">
         <p className="font-medium text-gray-900 truncate">{expense.description}</p>
-        <p className="text-sm text-gray-500">{expense.category}</p>
+        <p className="text-sm text-gray-500">{EXPENSE_CATEGORY_LABELS[expense.category]}</p>
       </div>
       <div className="flex items-center gap-3 shrink-0">
         <span className="font-semibold text-gray-900">
           R$ {Number(expense.amount).toFixed(2)}
         </span>
-        <Button variant="secondary" onClick={() => onEdit(expense)}>
+        <Button variant={ButtonVariant.Secondary} onClick={() => onEdit(expense)}>
           Editar
         </Button>
-        <Button variant="danger" onClick={() => onDelete(expense.id)}>
+        <Button variant={ButtonVariant.Danger} onClick={() => onDelete(expense.id)}>
           Excluir
         </Button>
       </div>

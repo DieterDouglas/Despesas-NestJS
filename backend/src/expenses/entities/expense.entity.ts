@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
+import { ExpenseCategory } from '../expense-category.enum';
 
 @Entity()
 export class Expense {
@@ -18,8 +19,8 @@ export class Expense {
   @Column('decimal', { precision: 10, scale: 2 })
   amount: number;
 
-  @Column()
-  category: string;
+  @Column({ type: 'enum', enum: ExpenseCategory })
+  category: ExpenseCategory;
 
   @CreateDateColumn()
   createdAt: Date;
