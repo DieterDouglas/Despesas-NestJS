@@ -2,6 +2,9 @@
 
 Aplicação full-stack de controle de despesas pessoais, com autenticação JWT, CRUD de despesas por categoria e visualização gráfica dos gastos.
 
+**Aplicação:** https://despesas-nest-js.vercel.app
+**API:** https://despesas-nestjs-production.up.railway.app
+
 ## Stack
 
 **Backend**
