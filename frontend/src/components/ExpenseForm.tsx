@@ -31,7 +31,7 @@ export function ExpenseForm({
   onCancel,
 }: ExpenseFormProps) {
   return (
-    <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+    <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-3.5 items-start sm:items-center">
       <Input
         type="text"
         placeholder="Descrição"

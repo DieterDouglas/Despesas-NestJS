@@ -10,13 +10,15 @@ interface ExpenseListItemProps {
 
 export function ExpenseListItem({ expense, onEdit, onDelete }: ExpenseListItemProps) {
   return (
-    <li className="flex items-center justify-between py-3 gap-3">
+    <li className="flex items-center justify-between py-4 gap-3 transition-colors duration-150 hover:bg-slate-50 -mx-2 px-2 rounded-lg">
       <div className="min-w-0 text-start">
-        <p className="font-medium text-gray-900 truncate">{expense.description}</p>
-        <p className="text-sm text-gray-500">{EXPENSE_CATEGORY_LABELS[expense.category]}</p>
+        <p className="font-medium text-slate-900 truncate">{expense.description}</p>
+        <span className="inline-block mt-1 text-xs font-medium text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-full">
+          {EXPENSE_CATEGORY_LABELS[expense.category]}
+        </span>
       </div>
       <div className="flex items-center gap-3 shrink-0">
-        <span className="font-semibold text-gray-900">
+        <span className="font-semibold text-slate-900 tabular-nums">
           R$ {Number(expense.amount).toFixed(2)}
         </span>
         <Button variant={ButtonVariant.Secondary} onClick={() => onEdit(expense)}>

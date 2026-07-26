@@ -46,9 +46,9 @@ export function Login() {
         </Button>
       </form>
       <FormError message={error} />
-      <p className="text-sm text-gray-600 mt-4 text-center">
+      <p className="text-sm text-slate-500 mt-6 text-center">
         Não tem conta?{' '}
-        <Link to="/register" className="text-blue-600 hover:underline">
+        <Link to="/register" className="text-indigo-600 font-medium hover:text-indigo-700 hover:underline">
           Registrar
         </Link>
       </p>

@@ -6,6 +6,7 @@ import { Card } from '../components/Card';
 import { Button, ButtonVariant } from '../components/Button';
 import { ExpenseForm } from '../components/ExpenseForm';
 import { ExpenseListItem } from '../components/ExpenseListItem';
+import { SectionTitle } from '../components/SectionTitle';
 import type { Expense } from '../types/expense';
 import { ExpenseCategory } from '../types/expense-category';
 
@@ -67,16 +68,20 @@ export function Expenses() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-3xl mx-auto px-4 py-8 flex flex-col gap-6">
+    <div className="min-h-screen bg-slate-50">
+      <div className="max-w-3xl mx-auto px-4 py-10 flex flex-col gap-8">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-semibold ">Despesas</h1>
+          <div>
+            <h1 className="text-2xl font-semibold tracking-tight text-slate-900">Despesas</h1>
+            <p className="text-sm text-slate-500 mt-1">Acompanhe e organize seus gastos por categoria.</p>
+          </div>
           <Button variant={ButtonVariant.Secondary} onClick={logout}>
             Sair
           </Button>
         </div>
 
         <Card>
+          <SectionTitle>{editingId ? 'Editar despesa' : 'Nova despesa'}</SectionTitle>
           <ExpenseForm
             description={description}
             amount={amount}
@@ -92,20 +97,26 @@ export function Expenses() {
         </Card>
 
         <Card>
+          <SectionTitle>Gastos por categoria</SectionTitle>
           <CategoryChart expenses={expenses} />
         </Card>
 
         <Card>
-          <ul className="divide-y divide-gray-200">
-            {expenses.map((expense) => (
-              <ExpenseListItem
-                key={expense.id}
-                expense={expense}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-              />
-            ))}
-          </ul>
+          <SectionTitle>Histórico</SectionTitle>
+          {expenses.length === 0 ? (
+            <p className="text-sm text-slate-500">Nenhuma despesa cadastrada ainda.</p>
+          ) : (
+            <ul className="divide-y divide-slate-200">
+              {expenses.map((expense) => (
+                <ExpenseListItem
+                  key={expense.id}
+                  expense={expense}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </ul>
+          )}
         </Card>
       </div>
     </div>

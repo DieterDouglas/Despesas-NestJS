@@ -7,9 +7,9 @@ export enum ButtonVariant {
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
-  [ButtonVariant.Primary]: 'bg-blue-600 text-white hover:bg-blue-700',
-  [ButtonVariant.Secondary]: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
-  [ButtonVariant.Danger]: 'bg-red-600 text-white hover:bg-red-700',
+  [ButtonVariant.Primary]: 'bg-indigo-600 text-white shadow-sm hover:bg-indigo-700',
+  [ButtonVariant.Secondary]: 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50',
+  [ButtonVariant.Danger]: 'bg-white text-red-600 border border-red-200 hover:bg-red-50',
 };
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -19,7 +19,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export function Button({ variant = ButtonVariant.Primary, className = '', ...props }: ButtonProps) {
   return (
     <button
-      className={`px-4 py-2 rounded-md font-medium transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${variantClasses[variant]} ${className}`}
+      className={`px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${variantClasses[variant]} ${className}`}
       {...props}
     />
   );

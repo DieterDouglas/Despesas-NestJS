@@ -56,7 +56,7 @@ export function Register() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-slate-500 mt-1.5">
             Mínimo de 8 caracteres, com maiúscula, minúscula, número e caractere especial.
           </p>
         </div>
@@ -65,9 +65,9 @@ export function Register() {
         </Button>
       </form>
       <FormError message={error} />
-      <p className="text-sm text-gray-600 mt-4 text-center">
+      <p className="text-sm text-slate-500 mt-6 text-center">
         Já tem conta?{' '}
-        <Link to="/login" className="text-blue-600 hover:underline">
+        <Link to="/login" className="text-indigo-600 font-medium hover:text-indigo-700 hover:underline">
           Login
         </Link>
       </p>
