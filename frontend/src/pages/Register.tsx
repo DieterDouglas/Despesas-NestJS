@@ -33,7 +33,7 @@ export function Register() {
 
   return (
     <AuthLayout title="Registrar">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-4">
         <Input
           type="text"
           placeholder="Nome"
@@ -55,8 +55,9 @@ export function Register() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            className="mb-2"
           />
-          <p className="text-xs text-slate-500 mt-1.5">
+          <p className="text-xs text-slate-500">
             Mínimo de 8 caracteres, com maiúscula, minúscula, número e caractere especial.
           </p>
         </div>

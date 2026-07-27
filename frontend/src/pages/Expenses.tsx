@@ -9,6 +9,7 @@ import { ExpenseListItem } from '../components/ExpenseListItem';
 import { SectionTitle } from '../components/SectionTitle';
 import type { Expense } from '../types/expense';
 import { ExpenseCategory } from '../types/expense-category';
+import { ConfirmDialog } from '../components/ConfirmDialog';
 
 export function Expenses() {
   const { logout } = useAuth();
@@ -18,6 +19,8 @@ export function Expenses() {
   const [category, setCategory] = useState<ExpenseCategory>(ExpenseCategory.OUTROS);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [error, setError] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedExpense, setSelectedExpense] = useState<Expense | null>(null);
 
   async function loadExpenses() {
     const { data } = await api.get<Expense[]>('/expenses');
@@ -57,14 +60,6 @@ export function Expenses() {
     setDescription(expense.description);
     setAmount(expense.amount);
     setCategory(expense.category);
-  }
-
-  async function handleDelete(id: string) {
-    await api.delete(`/expenses/${id}`);
-    if (editingId === id) {
-      resetForm();
-    }
-    await loadExpenses();
   }
 
   return (
@@ -112,13 +107,23 @@ export function Expenses() {
                   key={expense.id}
                   expense={expense}
                   onEdit={handleEdit}
-                  onDelete={handleDelete}
+                  onDelete={() => {
+                    setIsOpen(true);
+                    setSelectedExpense(expense);
+                  }}
                 />
+
               ))}
             </ul>
           )}
         </Card>
       </div>
+      <ConfirmDialog
+        isOpen={isOpen}
+        expense={selectedExpense}
+        onOpenChange={setIsOpen}
+        onConfirmed={async () => { await loadExpenses() }}
+      />
     </div>
   );
 }

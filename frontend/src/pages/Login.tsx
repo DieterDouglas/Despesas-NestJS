@@ -26,7 +26,7 @@ export function Login() {
 
   return (
     <AuthLayout title="Login">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-4">
         <Input
           type="email"
           placeholder="Email"
@@ -46,7 +46,7 @@ export function Login() {
         </Button>
       </form>
       <FormError message={error} />
-      <p className="text-sm text-slate-500 mt-6 text-center">
+      <p className="text-sm text-slate-500 text-center">
         Não tem conta?{' '}
         <Link to="/register" className="text-indigo-600 font-medium hover:text-indigo-700 hover:underline">
           Registrar
